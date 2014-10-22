@@ -21,10 +21,14 @@ skipped_labs = labs_without_tests + labs_that_dont_work_with_this_gem
 
 def test_all(path, skipped_labs, username, user_id)
   Dir.chdir path do
-    labs = Dir.glob("**/*006/").sort_by{ |f| File.ctime(f) } - skipped_labs
-    puts labs
+    labs = Dir.glob("**/*006/").sort_by{ |f| File.ctime(f) }
+    # puts labs
+    skipped_labs.each do |skipped_lab|
+      labs.reject! { |lab| lab.include? skipped_lab }
+    end
     labs.each do |lab|
       Dir.chdir lab do
+        puts `pwd`
         nice_lab_name = lab.sub("-ruby-006","").split("-").map(&:capitalize).join(" ")
         puts "\nChecking #{nice_lab_name}...\n\n".magenta
         repo = RSpec::Ironboard::RepoParser.get_repo
