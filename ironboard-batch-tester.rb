@@ -29,7 +29,8 @@ def test_all(path, skipped_labs, username, user_id)
     labs.each do |lab|
       Dir.chdir lab do
         puts `pwd`
-        nice_lab_name = lab.sub("-ruby-006","").split("-").map(&:capitalize).join(" ")
+        lab_name = lab.split("/").find { |str| str.include? "-ruby-006" }
+        nice_lab_name = lab_name.sub("-ruby-006","").split("-").map(&:capitalize).join(" ")
         puts "\nChecking #{nice_lab_name}...\n\n".magenta
         repo = RSpec::Ironboard::RepoParser.get_repo
         runner = RSpec::Ironboard::Runner.new(username, user_id, repo, [])
