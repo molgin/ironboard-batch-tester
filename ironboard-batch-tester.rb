@@ -17,7 +17,11 @@ labs_without_tests = ["git-merge-conflicts-ruby-006", "countdown-to-midnight-rub
   "config-ru-tutorial-ruby-006", "middleware-tutorial-ruby-006", "sinatra-adventure-ruby-006"]
 labs_that_dont_work_with_this_gem = ["first-lab-ruby-006", "activerecord-costume-store-todo-ruby-006",
   "playlister-on-activerecord-ruby-006", "playlister-static-generator-with-ar-ruby-006"]
-skipped_labs = labs_without_tests + labs_that_dont_work_with_this_gem
+
+# if any labs throw an error, add them here to skip them when you re-run
+other_labs_to_skip = []
+
+skipped_labs = labs_without_tests + labs_that_dont_work_with_this_gem + other_labs_to_skip
 
 def test_all(path, skipped_labs, username, user_id)
   Dir.chdir path do
