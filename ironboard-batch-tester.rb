@@ -30,7 +30,7 @@ skipped_labs = labs_without_tests | labs_that_dont_work_with_this_gem | other_la
 
 class IronboardTester
   attr_reader :path
-  attr_accessor :username, :skipped_labs, :skip_successful_labs_on_rerun, :passing_labs, :labs
+  attr_accessor :username, :skipped_labs, :skip_successful_labs_on_rerun, :passing_labs, :labs, :unskipped, :forced
 
   def initialize(path, username, skipped_labs, skip_successful_labs_on_rerun)
     @path = path
@@ -39,6 +39,8 @@ class IronboardTester
     @skip_successful_labs_on_rerun = skip_successful_labs_on_rerun
     @passing_labs = read_or_create_log
     @labs = get_labs
+    @unskipped = []
+    @forced = false
   end
 
   def user_id
@@ -56,16 +58,17 @@ class IronboardTester
   end
 
   def new_runner(lab)
-    RSpec::Ironboard::Runner.new(username, user_id, lab, [])
+    RSpec::Ironboard::Runner.new(username, user_id, lab_name(lab), [])
   end
 
   def skip(lab)
     skipped_labs << lab
+    unskipped.delete(lab)
   end
 
-  def unskip(lab)
-    labs << lab
-    skipped_labs.delete!(lab)
+  def force(lab)
+    self.forced = true
+    unskipped << lab
   end
 
   def test(lab)
@@ -136,6 +139,7 @@ class IronboardTester
   def run
     self.passing_labs = read_or_create_log
     skip_passing_labs if skip_successful_labs_on_rerun
+    self.skipped_labs = skipped_labs - unskipped if forced
     reject_skipped_labs
     puts "All the non-skipped labs have already been tested and passed!" if labs.empty?
     test_all
@@ -147,5 +151,3 @@ end
 tester = IronboardTester.new(labs_path, username, skipped_labs, skip_successful_labs_on_rerun)
 
 tester.run
-
-
