@@ -20,7 +20,6 @@ labs_path = "/users/[your details here]"
 
 # your github username here!
 username = ""
-
 ```
 
 Add that info and save the file.
