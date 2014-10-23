@@ -17,7 +17,7 @@ skip_successful_labs_on_rerun = true
 
 labs_without_tests = ["git-merge-conflicts-ruby-006", "countdown-to-midnight-ruby-006",
   "scraping-the-students-page-ruby-006", "debug-me-ruby-006", "rack-todo-ruby-006",
-  "config-ru-tutorial-ruby-006", "middleware-tutorial-ruby-006", "sinatra-adventure-ruby-006"]
+  "config-ru-tutorial-ruby-006", "middleware-tutorial-ruby-006", "sinatra-adventure-ruby-006", "sinatra-messages-ruby-006"]
 labs_that_dont_work_with_this_gem = ["first-lab-ruby-006", "activerecord-costume-store-todo-ruby-006",
   "playlister-on-activerecord-ruby-006", "playlister-static-generator-with-ar-ruby-006"]
 
