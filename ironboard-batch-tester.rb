@@ -141,7 +141,7 @@ class IronboardTester
     skip_passing_labs if skip_successful_labs_on_rerun
     self.skipped_labs = skipped_labs - unskipped if forced
     reject_skipped_labs
-    puts "All the non-skipped labs have already been tested and passed!" if labs.empty?
+    puts "All the non-skipped labs have already been tested and passed!".magenta if labs.empty?
     test_all
   end
 
