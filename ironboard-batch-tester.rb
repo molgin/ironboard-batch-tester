@@ -57,8 +57,12 @@ class IronboardTester
     RSpec::Ironboard::GitHubInteractor.get_user_id_for(username)
   end
 
+  def repo
+    RSpec::Ironboard::RepoParser.get_repo
+  end
+
   def new_runner(lab)
-    RSpec::Ironboard::Runner.new(username, user_id, lab_name(lab), [])
+    RSpec::Ironboard::Runner.new(username, user_id, repo, [])
   end
 
   def skip(lab)
@@ -118,7 +122,7 @@ class IronboardTester
   end
 
   def lab_name(lab)
-    lab.split("/").find { |str| str.include? "-ruby-006" }
+    lab.split("/").find { |str| str.include? "-ruby-006" }.gsub("_", "-")
   end
 
   def nice_lab_name(lab)
