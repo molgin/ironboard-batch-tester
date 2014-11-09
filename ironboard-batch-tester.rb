@@ -1,6 +1,6 @@
 SERVICE_URL = 'http://ironbroker.flatironschool.com'
 SERVICE_ENDPOINT = '/e/flatiron_rspec/build/ironboard'
-require 'rspec/ironboard'
+require 'ironboard'
 require 'colorize'
 
 # the absolute path to the directory containing all your labs goes here!
@@ -54,15 +54,15 @@ class IronboardTester
   end
 
   def get_user_id
-    RSpec::Ironboard::GitHubInteractor.get_user_id_for(username)
+    Ironboard::UserIdParser.get_user_id
   end
 
   def repo
-    RSpec::Ironboard::RepoParser.get_repo
+    Ironboard::RepoParser.get_repo
   end
 
   def new_runner(lab)
-    RSpec::Ironboard::Runner.new(username, user_id, repo, [])
+    Ironboard::RSpec::Runner.new(username, user_id, repo, [])
   end
 
   def skip(lab)
