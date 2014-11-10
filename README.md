@@ -28,7 +28,7 @@ Add that info and save the file.
 
 By default, Batch Tester will keep track of the labs it has tested and found to pass, and will skip them if you re-run it. To turn off this feature and test all labs every time, change `skip_successful_labs_on_rerun` to `false`.
 
-If one of your labs ends up throwing an error, Batch Tester will terminate. If this happens it's probably a problem with your code for that lab just like when RSpec throws an error. If you don't want to fix it right away, you can just add the name of that lab to the `other_labs_to_skip` array, following the format of the other arrays, so that Batch Tester will be able to finish testing the other labs when you re-run it.
+If one of your labs ends up throwing an error, Batch Tester will terminate. If this happens it’s probably a problem with your code for that lab just like when RSpec throws an error. If you don’t want to fix it right away, you can just add the name of that lab to the `other_labs_to_skip` array, following the format of the other arrays, so that Batch Tester will be able to finish testing the other labs when you re-run it.
 
 ----
 ## Usage
